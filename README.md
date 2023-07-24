@@ -5,6 +5,14 @@
 - NODEMON
 - SUCRASE
 - PRISMA
-    - npm install prisma --save-dev
-    - npm install @prisma/client
-    - npx prisma init
+     npm install prisma --save-dev
+     npm install @prisma/client
+     npx prisma init
+     npx prisma migrate dev
+     npx prisma migrate reset
+- BCRYPT
+    npm install bcrypt
+- INSOMNIA
+
+- JWT
+     npm install jsonwebtoken
