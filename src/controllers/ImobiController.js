@@ -6,6 +6,8 @@ export default {
     async createImobi(request, response){
 
         try{
+            const thumb = request.file.filename;
+
             const { id, tipo, endereco, cidade, uf, valor, descricao} = request.body;
 
             const user = await prisma.user.findUnique({ where: { id: Number(id) } });
@@ -16,6 +18,7 @@ export default {
 
             let imobis = await prisma.imobi.create({
                 data: {
+                    thumb,
                     tipo,
                     endereco,
                     cidade,
