@@ -1,21 +1,21 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
-export default{
+export default {
 
     async createImobi(request, response){
 
         try{
             const { id, tipo, endereco, cidade, uf, valor, descricao} = request.body;
 
-            const user = await prisma.user.findUnique({where: {id: Numer(id)}});
+            const user = await prisma.user.findUnique({ where: { id: Number(id) } });
 
             if(!user){
                 return response.json({message: "usuario não encontrado!"});
             }
 
-            const imobi = await prisma.imobi.create({
-                data:{
+            let imobis = await prisma.imobi.create({
+                data: {
                     tipo,
                     endereco,
                     cidade,
@@ -26,10 +26,42 @@ export default{
                 }
             });
 
-            return response.json(imobi);
+            return response.json(imobis);
             
         }catch(error){
 
+            return response.json({message: error.message});
+        }
+    },
+
+    async findAllImobi(request, response){
+
+        try{
+            
+            const imobis = await prisma.imobi.findMany();
+
+            return response.json(imobis);
+            
+        }catch(error){
+
+            return response.json({message: error.message});
+        }
+    },
+
+    async findImobi(request, response){
+
+        try{
+            const { id } = request.params;
+
+            const imobiSearch = await prisma.imobi.findUnique({ where: {id: Number(id)} });
+
+            if(!imobiSearch){
+                return response.json({ message: "Imovel inexistente"});
+            }
+
+            return response.json(imobiSearch);
+
+        }catch(error){
             return response.json({message: error.message});
         }
     }
