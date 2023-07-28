@@ -71,5 +71,11 @@ Para trabalhar com upload de imagens no banco de dados
      npm install --save multer
 ```
 
+##### - CORS
+Para auxiliar na API
+```bash
+     npm install cors
+```
+
 ##### - MYSQL
 Banco de dados utilizado
