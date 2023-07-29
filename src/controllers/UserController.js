@@ -51,5 +51,31 @@ export default {
 
             return res.json({ message: error.message});
         }
+    },
+
+    async findUser(req, res){
+
+        try{
+            const { userId } = req.params;
+
+            const user = await prisma.user.findUnique({
+                where: {
+                    userId: userId
+                }
+            })
+
+            if(!user){
+                return res.json({ error: true,
+                    message: "Usuário não existe"});
+            }
+
+            return res.json(user);
+
+        }catch(error){
+
+            return res.json({message: error.message});
+        }
     }
+
+
 }
