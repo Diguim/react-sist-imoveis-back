@@ -7,19 +7,16 @@ export default {
         const { client_name, client_email, client_message, userId} = request.body;
 
         try{
-
-            let message = await prisma.messages.findFirst({
-                where: {client_email}
+            let messagem = await prisma.messages.findFirst({
+                where: { client_email }
             });
-
-            if(message){
+            if(messagem){
                 return response.json({
                     error: true,
                     message: "Mensagem já cadastrada, aguarde resposta do anunciante"
                 });
             }
-
-            message = await prisma.messages.create({
+            messagem = await prisma.messages.create({
                 data: {
                     client_name,
                     client_email,
@@ -27,10 +24,10 @@ export default {
                     userId
                 }
             });
-
             return response.json({
                 error: false,
-                message: "Sucesso: Mensagem cadastrada com sucesso"
+                message: "Sucesso: Mensagem cadastrada com sucesso",
+                messagem
             });
         }catch(error){
             return response.json({message: error.message});
@@ -39,17 +36,13 @@ export default {
 
     async findMessage(request, response){
         try{
-
             const { id } = request.params;
-
             const messagem = await prisma.messages.findMany({
                 where: { userId: Number(id) }
             });
-
             return response.json({
                 messagem
             });
-
         }catch(error){
             return response.json({
                 message:error.message

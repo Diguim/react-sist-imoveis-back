@@ -19,10 +19,9 @@ router.get('/listusers/:userId', UserController.findUser);
 
 router.post('/session', SessionController.createSession);
 
-router.post('/createimobi', upload.single("thumb"), ImobiController.createImobi);
+router.post('/createImobi', upload.single("thumb"), ImobiController.createImobi);
 router.get('/listImobi', ImobiController.findAllImobi);
-router.get('/listImobi/:id', ImobiController.findImobi);
-router.get('/listImobi/:slug', ImobiController.findImobi);
+router.get('/listImobi/:id', ImobiController.findImobiById);
 
 router.post('/createmessage', MessageController.createMessage);
 router.get('/listmessage/:id', MessageController.findMessage);
