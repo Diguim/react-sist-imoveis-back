@@ -39,7 +39,7 @@ export default {
     async findAllImobi(request, response){
 
         try{
-            const imobis = await prisma.imobi.findMany({take: 10});
+            const imobis = await prisma.imobi.findMany();
             return response.json(imobis);
         }catch(error){
             return response.json({message: error.message});
